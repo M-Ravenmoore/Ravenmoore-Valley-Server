@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (scope) => {
-  return (req, res, next) => {
+  return (request, response, next) => {
     try {
-      if (req.user.permissions.includes(scope)) {
+      if (request.user.permissions.includes(scope)) {
         next();
       }
       else {
