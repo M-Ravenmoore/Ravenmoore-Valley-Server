@@ -33,7 +33,7 @@ function homeHandler(request, response){
 // get permissions on req.user.permissions this is how we will asign acl
 
 function userHandler(request, response){
-  console.log(request)
+  console.log(request.user)
   response.status(200).json({
     'title':'secured user page'});
 }
