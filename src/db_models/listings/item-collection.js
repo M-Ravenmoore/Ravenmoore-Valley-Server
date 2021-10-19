@@ -1,7 +1,9 @@
-class DataCollection {
+const itemModel = require('./itemModel')
 
-  constructor(model) {
-    this.model = model;
+class ListingCollection {
+
+  constructor() {
+    this.model = itemModel;
   }
   
   get(_id) {
@@ -13,17 +15,23 @@ class DataCollection {
     }
   }
 
+  getByEmail(email){
+      return this.model.findOne({email});
+  }
+
   create(record){
     let newRecord = new this.model(record);
     return newRecord.save();
   }
 
   update(_id,record){
-    return this.model.findByIdAndUpdate(_id, record, {ne: true});
+    return this.model.findByIdAndUpdate(_id, record, {new: true});
   }
 
   delete(_id){
     return this.model.findByIdAndDelete(_id);
   }
 }
-module.exports = DataCollection
+const listings =new ListingCollection();
+module.exports = listings
+
