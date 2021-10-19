@@ -6,8 +6,9 @@ const cors = require('cors');
 const app = express();
 
 const { checkJwt } = require("./auth/checkjwt");
-const v1Routes = require("./Routes/v1Routes");
-const v2Routes = require("./Routes/v2Routes");
+const listingsRoutes = require("./Routes/listingRoutes");
+const usersRoutes = require("./Routes/userRoutes");
+const newsRoutes = require("./Routes/newsRoutes");
 const notFoundHandler = require('./error-handlers/404.js');
 const errorHandler = require('./error-handlers/500.js');
 
@@ -18,8 +19,8 @@ app.use(express.urlencoded({extended:true}));
 
 app.get('/', homeHandler);
 app.get('/user', checkJwt, userHandler);
-app.use('/api/v1', v1Routes );
-app.use('/api/v2', v2Routes );
+app.use('/api', listingsRoutes,usersRoutes,newsRoutes );
+
 
 app.use('*', notFoundHandler);
 app.use(errorHandler);
