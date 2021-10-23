@@ -7,6 +7,9 @@ const itemListingSchema = mongoose.Schema({
   itemDescription:{type:String, required:true},
   itemPrice:{type:Number, required:true},
   itemQuantity:{type:Number, required:true},
+  itemColors:{type:[String]},
+  itemTags:{type:[String]}, 
+  shopName:{type:[String]},
   createdBy:{type:String, required:true},
 });
 

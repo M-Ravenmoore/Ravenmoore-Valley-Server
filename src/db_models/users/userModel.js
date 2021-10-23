@@ -7,7 +7,8 @@ const userSchema = mongoose.Schema({
   email:{type:String, required:true},
   username:{type:String, required:true},
   address:{type:Array},
-  image:{type:String}
+  image:{type:String},
+  authSub:{type:String}
 });
 
 const userModel = mongoose.model('user', userSchema);
