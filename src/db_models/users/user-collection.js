@@ -15,8 +15,8 @@ class UserCollection {
     }
   }
 
-  getByEmail(email){
-      return this.model.findOne({email});
+  getByauthSub(authSub){
+      return this.model.findOne({authSub:authSub});
   }
 
   create(record){

@@ -8,7 +8,8 @@ const {checkJwt} = require('../auth/checkjwt');
 const permissions = require('../auth/acl.js');
 
 router.get('/users',checkJwt, permissions('read:users'), handleGetAll)
-router.get('/users/:id',checkJwt, permissions('read:profile'), handleGetOne);
+router.get('/users/:id',checkJwt, permissions('read:users'), handleGetOne);
+router.get('/profile',checkJwt, handleGetProfile)
 router.post('/users',checkJwt, permissions('create:users'), handleCreate);
 router.put('/users/:id',checkJwt, permissions('update:users'), handleUpdate);
 router.delete('/users/:id',checkJwt, permissions('delete:users'), handleDelete);
@@ -23,6 +24,13 @@ async function handleGetOne(req, res) {
   
   const id = req.params.id;
   let theRecord = await users.get(id);
+  res.status(200).json(theRecord);
+}
+async function handleGetProfile(req, res) {
+  console.log(req.user.sub)
+  const authSub = req.user.sub
+  let theRecord = await users.getByauthSub(authSub);
+  console.log('the record', theRecord)
   res.status(200).json(theRecord);
 }
 async function handleCreate(req, res) {
